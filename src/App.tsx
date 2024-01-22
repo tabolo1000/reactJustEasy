@@ -5,6 +5,7 @@ import React from 'react';
 function App() {
     return (
         <div className="App">
+            <AppTitle/>
             <Rating/>
             <Accordion/>
         </div>
@@ -41,4 +42,8 @@ let Accordion = () => {
         <AccordionTitle/>
         <AccordionBody />
     </div>
+}
+
+let AppTitle = () => {
+    return <>This is App Component</>
 }
