@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Accordion} from "./components/Accordion/Accordion";
 
 const RatingULStyle = {
@@ -21,11 +21,14 @@ interface AppTitleType {
 
 
 function App() {
+
+    let[collapse, changeCollapse] = useState(true)
     return (
         <div className="App">
             <AppTitle title = "This is App Component"/>
             <Rating value = {1}/>
-            <Accordion title = "Menu"/>
+            <Accordion title = "Menu students" changeCollapse = {changeCollapse} collapse = {collapse}/>
+            {/*<Accordion title = "Menu teachers" changeCollapse = {changeCollapse} collapse = {collapse}/>*/}
         </div>
     );
 }
@@ -36,19 +39,13 @@ let Rating:FC<RatingProps> = ({value}) => {
     let stars = [1,2,3,4,5].map((el, index) => {
        return (++index <= value ) ? <Star selected = {true}/>: <Star selected = {false}/>
     })
-    // let ChangeStar = (bold: number) => {
-    //     return (bold <= value ) ? <Star selected = {true}/>: <Star selected = {false}/>
-    // }
-    // for(let i = 1; i <= 5; i++){
-    //     stars.push(ChangeStar(i))
-    // }
   return <ul style = {RatingULStyle} >
       {stars}
   </ul>
 }
 
-let Star:FC<StarPropsType> = (props) => {
-    return (props.selected) ? <li style = {{fontWeight: "200"}}>star</li>: <li>star</li>
+let Star:FC<StarPropsType> = ({selected}) => {
+    return (selected) ? <li style = {{fontWeight: "200"}}>star</li>: <li>star</li>
 }
 
 

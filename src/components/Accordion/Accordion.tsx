@@ -1,22 +1,32 @@
-import React, {FC} from "react";
+import React, {Dispatch, FC, SetStateAction} from "react";
 
 
-interface AccordingType {
+interface AccordingTitleType {
     title: string,
 }
-let AccordionTitle:FC<AccordingType> = ({title}) => {
-    return <h3>{title}</h3>
+
+interface AccordionBodyType {
+    collapse: boolean
 }
-let AccordionBody = () => {
-    return <ul>
+
+interface AccordionType {
+    title: string,
+    changeCollapse: Dispatch<SetStateAction<boolean>>,
+    collapse: boolean,
+}
+let AccordionTitle:FC<AccordionType> = ({title, changeCollapse, collapse}) => {
+    return <h3 onClick = {() => changeCollapse(!collapse)}>{title}</h3>
+}
+let AccordionBody:FC<AccordionBodyType> = ({collapse}) => {
+    return (collapse)?<ul>
         <li>1</li>
         <li>2</li>
         <li>3</li>
-    </ul>
+    </ul>: <></>
 }
-export let Accordion:FC<AccordingType> = ({title}) => {
+export let Accordion:FC<AccordionType> = (props) => {
     return <div>
-        <AccordionTitle title = {title}/>
-        <AccordionBody />
+        <AccordionTitle {...props}/>
+        <AccordionBody collapse = {props.collapse}/>
     </div>
 }
