@@ -1,49 +1,56 @@
-import React from 'react';
+import React, {FC} from 'react';
+import {Accordion} from "./components/Accordion/Accordion";
 
+const RatingULStyle = {
+    listStyleType: "none",
+    display: "flex",
+    justifyContent: "space-between",
+    width: "150px",
+}
+
+interface RatingProps {
+    value: number
+}
+
+interface StarPropsType {
+    selected?: boolean
+}
+interface AppTitleType {
+    title: string
+}
 
 
 function App() {
     return (
         <div className="App">
-            <AppTitle/>
-            <Rating/>
-            <Accordion/>
+            <AppTitle title = "This is App Component"/>
+            <Rating value = {2}/>
+            <Accordion title = "Menu"/>
         </div>
     );
 }
 
 export default App;
 
-let Rating = () => {
-  return <ul>
-      <Star/>
-      <Star/>
-      <Star/>
-      <Star/>
+let Rating:FC<RatingProps> = ({value}) => {
+    let stars = []
+    let ChangeStar = (bold: number) => {
+        return (bold <= value ) ? <Star selected = {true}/>: <Star selected = {false}/>
+    }
+    for(let i = 1; i <= 5; i++){
+        stars.push(ChangeStar(i))
+    }
+  return <ul style = {RatingULStyle} >
+      {stars}
   </ul>
 }
 
-let Star = () => {
-    return <li>star</li>
+let Star:FC<StarPropsType> = (props) => {
+    return (props.selected) ? <li style = {{fontWeight: "200"}}>star</li>: <li>star</li>
 }
 
-let AccordionTitle = () => {
-  return <h3>Menu</h3>
-}
-let AccordionBody = () => {
-  return <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-  </ul>
-}
-let Accordion = () => {
-    return <div>
-        <AccordionTitle/>
-        <AccordionBody />
-    </div>
-}
 
-let AppTitle = () => {
-    return <>This is App Component</>
+
+let AppTitle:FC<AppTitleType> = ({title}) => {
+    return <>{title}</>
 }
