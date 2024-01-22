@@ -6,19 +6,23 @@ interface AccordingTitleType {
 }
 
 interface AccordionBodyType {
-    collapse: boolean
+    collapse: AccordionTaskType[]
 }
-
-interface AccordionType {
+type AccordionTaskType = {
     title: string,
-    changeCollapse: Dispatch<SetStateAction<boolean>>,
-    collapse: boolean,
+    id: string
 }
-let AccordionTitle:FC<AccordionType> = ({title, changeCollapse, collapse}) => {
-    return <h3 onClick = {() => changeCollapse(!collapse)}>{title}</h3>
+interface AccordionType {
+    id: string
+    title: string,
+    changeCollapse: Dispatch<SetStateAction<any>>,
+    collapse: any,
 }
-let AccordionBody:FC<AccordionBodyType> = ({collapse}) => {
-    return (collapse)?<ul>
+let AccordionTitle:FC<AccordionType> = ({ id ,title, changeCollapse, collapse}) => {
+    return <h3 onClick = {() => changeCollapse({...collapse, [id]: {...collapse[id], isDone: !collapse[id].isDone} })}>{title}</h3>
+}
+let AccordionBody:FC<any> = ({collapse, id}) => {
+    return (collapse[id].isDone)?<ul>
         <li>1</li>
         <li>2</li>
         <li>3</li>
@@ -27,6 +31,6 @@ let AccordionBody:FC<AccordionBodyType> = ({collapse}) => {
 export let Accordion:FC<AccordionType> = (props) => {
     return <div>
         <AccordionTitle {...props}/>
-        <AccordionBody collapse = {props.collapse}/>
+        <AccordionBody collapse = {props.collapse} id = {props.id}/>
     </div>
 }
