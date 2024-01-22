@@ -24,7 +24,7 @@ function App() {
     return (
         <div className="App">
             <AppTitle title = "This is App Component"/>
-            <Rating value = {2}/>
+            <Rating value = {1}/>
             <Accordion title = "Menu"/>
         </div>
     );
@@ -33,13 +33,15 @@ function App() {
 export default App;
 
 let Rating:FC<RatingProps> = ({value}) => {
-    let stars = []
-    let ChangeStar = (bold: number) => {
-        return (bold <= value ) ? <Star selected = {true}/>: <Star selected = {false}/>
-    }
-    for(let i = 1; i <= 5; i++){
-        stars.push(ChangeStar(i))
-    }
+    let stars = [1,2,3,4,5].map((el, index) => {
+       return (++index <= value ) ? <Star selected = {true}/>: <Star selected = {false}/>
+    })
+    // let ChangeStar = (bold: number) => {
+    //     return (bold <= value ) ? <Star selected = {true}/>: <Star selected = {false}/>
+    // }
+    // for(let i = 1; i <= 5; i++){
+    //     stars.push(ChangeStar(i))
+    // }
   return <ul style = {RatingULStyle} >
       {stars}
   </ul>
