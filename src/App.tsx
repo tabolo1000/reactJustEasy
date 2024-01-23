@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Accordion} from "./components/Accordion/Accordion";
+import {OnOff} from "./components/OnOff/OnOff";
 
 const RatingULStyle = {
     listStyleType: "none",
@@ -31,6 +32,7 @@ function App() {
     return (
         <div className="App">
             <AppTitle title = "This is App Component"/>
+            <OnOff />
             <Rating value = {1}/>
             <Accordion id = {verIdFirst} title = {collapse[verIdFirst].title} changeCollapse = {changeCollapse} collapse = {collapse}/>
             <Accordion id = {verIdSecond} title = {collapse[verIdSecond].title} changeCollapse = {changeCollapse} collapse = {collapse}/>
