@@ -16,14 +16,20 @@ const buttonStyle = {
     cursor: "pointer"
 }
 export function OnOff(){
+
     let [on, setOn] = useState(false)
+    const onButtonExtensionStyle = {...buttonStyle, backgroundColor: (on) ? "green" : ""}
+    const offButtonExtensionStyle = {...buttonStyle, backgroundColor: (!on) ? "red" : ""}
+    const singLightExtensionStyle = {...singLiteStyle, backgroundColor: (on) ? "green" : "red" }
 
-
+    const setOnHandler = (lightGreen: boolean) => {
+        setOn(lightGreen)
+    }
     return <div>
         <ul style = {{listStyle: "none", display: "flex", justifyContent: "space-around", width: "150px"}}>
-            <li style = {{...buttonStyle, backgroundColor: (on) ? "green" : ""}} onClick = {()=>{ setOn(true)} }>ON</li>
-            <li style = {{...buttonStyle, backgroundColor: (!on) ? "red" : ""}} onClick = { () => {setOn(false)}}>OFF</li>
-            <li style = {{...singLiteStyle, backgroundColor: (on) ? "green" : "red" }}>Light</li>
+            <li style = {onButtonExtensionStyle} onClick = {()=>{ setOnHandler(true)} }>ON</li>
+            <li style = {offButtonExtensionStyle} onClick = { () => {setOnHandler(false)}}>OFF</li>
+            <li style = {singLightExtensionStyle}>Light</li>
         </ul>
     </div>
 }
