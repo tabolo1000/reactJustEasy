@@ -1,8 +1,11 @@
 import React, {FC, useState} from 'react';
 import {Accordion} from "./components/Accordion/Accordion";
 import {OnOff} from "./components/OnOff/OnOff";
+import {UncontrolledAccordion} from "./components/Accordion/Uncontrolled/UncontrolledAccordion";
+import styled from "styled-components";
+import {UncontrolledRating} from "./components/Rating/UncantrolledRating/UncantrolledRating";
 
-const RatingULStyle = {
+export const RatingULStyle = {
     listStyleType: "none",
     display: "flex",
     justifyContent: "space-between",
@@ -16,47 +19,70 @@ interface RatingProps {
 interface StarPropsType {
     selected?: boolean
 }
+
 interface AppTitleType {
     title: string
 }
 
 let verIdFirst = "1";
-let verIdSecond = "2";
+// let verIdSecond = "2";
+
 
 function App() {
 
-    let[collapse, changeCollapse] = useState({
+    let [collapse, changeCollapse] = useState({
         [verIdFirst]: {id: 1, title: "Menu students", isDone: true},
-        [verIdSecond]: {id: 2, title: "Menu teacher", isDone: true},
-     })
+        // [verIdSecond]: {id: 2, title: "Menu teacher", isDone: true},
+    })
     return (
-        <div className="App">
-            <AppTitle title = "This is App Component"/>
-            <OnOff />
-            <Rating value = {1}/>
-            <Accordion id = {verIdFirst} title = {collapse[verIdFirst].title} changeCollapse = {changeCollapse} collapse = {collapse}/>
-            <Accordion id = {verIdSecond} title = {collapse[verIdSecond].title} changeCollapse = {changeCollapse} collapse = {collapse}/>
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%"
+        }}>
+            <TaskStyled >
+                <AppTitle title="This is App Component"/>
+                <OnOff/>
+                <Rating value = {5}/>
+                <Accordion id={verIdFirst} title={collapse[verIdFirst].title} changeCollapse={changeCollapse}
+                           collapse={collapse}/>
+                <UncontrolledRating/>
+                <UncontrolledAccordion />
+            </TaskStyled>
         </div>
     );
 }
 
 export default App;
 
-let Rating:FC<RatingProps> = ({value}) => {
-    let stars = [1,2,3,4,5].map((el, index) => {
-       return (++index <= value ) ? <Star selected = {true}/>: <Star selected = {false}/>
+let Rating: React.FC<RatingProps> = ({value}) => {
+    let stars = [1, 2, 3, 4, 5].map((el, index) => {
+        return (++index <= value) ? <Star selected={true}/> : <Star selected={false}/>
     })
-  return <ul style = {RatingULStyle} >
-      {stars}
-  </ul>
+    return <ul style={RatingULStyle}>
+        {stars}
+    </ul>
 }
 
-let Star:FC<StarPropsType> = ({selected}) => {
-    return (selected) ? <li style = {{fontWeight: "200"}}>star</li>: <li>star</li>
+export let Star: FC<StarPropsType> = ({selected}) => {
+    return (selected) ? <li style={{fontWeight: "200"}}>star</li> : <li>star</li>
 }
 
 
-
-let AppTitle:FC<AppTitleType> = ({title}) => {
+let AppTitle: FC<AppTitleType> = ({title}) => {
     return <>{title}</>
 }
+
+
+let TaskStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid #29322f;
+  width: 300px;
+  background-image: linear-gradient(60deg, #2d2932, rgba(72, 0, 255, 0.57));
+  border-radius: 10px;
+`
