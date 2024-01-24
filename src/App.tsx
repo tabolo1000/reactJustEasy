@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import {Accordion} from "./components/Accordion/Accordion";
 import {OnOff} from "./components/OnOff/OnOff";
 import {UncontrolledAccordion} from "./components/Accordion/Uncontrolled/UncontrolledAccordion";
@@ -13,11 +13,14 @@ export const RatingULStyle = {
 }
 
 interface RatingProps {
-    value: number
+    countStar: number,
+    setCountStar: Dispatch<SetStateAction<number>>
 }
 
 interface StarPropsType {
-    selected?: boolean
+    selected?: boolean,
+    id?: number
+    setCountStar?: Dispatch<SetStateAction<number>>
 }
 
 interface AppTitleType {
@@ -29,7 +32,7 @@ let verIdFirst = "1";
 
 
 function App() {
-
+   let [countStar, setCountStar] = useState(0)
     let [collapse, changeCollapse] = useState({
         [verIdFirst]: {id: 1, title: "Menu students", isDone: true},
         // [verIdSecond]: {id: 2, title: "Menu teacher", isDone: true},
@@ -44,7 +47,7 @@ function App() {
             <TaskStyled >
                 <AppTitle title="This is App Component"/>
                 <OnOff/>
-                <Rating value = {5}/>
+                <Rating countStar = {countStar} setCountStar = {setCountStar}/>
                 <Accordion id={verIdFirst} title={collapse[verIdFirst].title} changeCollapse={changeCollapse}
                            collapse={collapse}/>
                 <UncontrolledRating/>
@@ -56,17 +59,21 @@ function App() {
 
 export default App;
 
-let Rating: React.FC<RatingProps> = ({value}) => {
+let Rating: React.FC<RatingProps> = ({countStar, setCountStar}) => {
+
     let stars = [1, 2, 3, 4, 5].map((el, index) => {
-        return (++index <= value) ? <Star selected={true}/> : <Star selected={false}/>
+        return (++index <= countStar) ? <Star id = {index} selected={true} setCountStar = {setCountStar}/> : <Star id = {index} selected={false} setCountStar = {setCountStar}/>
     })
     return <ul style={RatingULStyle}>
         {stars}
     </ul>
 }
 
-export let Star: FC<StarPropsType> = ({selected}) => {
-    return (selected) ? <li style={{fontWeight: "200"}}>star</li> : <li>star</li>
+export let Star: FC<any> = ({selected, id, setCountStar}) => {
+    let  changeStarHandler = (newCountStar: number) =>{
+        setCountStar(newCountStar)
+    }
+    return (selected) ? <StarListStyle onClick = {() => {changeStarHandler(id)} } style={{fontWeight: "200"}}>star</StarListStyle> : <StarListStyle onClick = {() => {changeStarHandler(id)}}>star</StarListStyle>
 }
 
 
@@ -85,4 +92,8 @@ let TaskStyled = styled.div`
   width: 300px;
   background-image: linear-gradient(60deg, #2d2932, rgba(72, 0, 255, 0.57));
   border-radius: 10px;
+`
+
+let StarListStyle = styled.li`
+    cursor: pointer;
 `
