@@ -42,7 +42,8 @@ function App() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100%"
+            height: "100%",
+            backgroundColor: "darkolivegreen"
         }}>
             <TaskStyled >
                 <AppTitle title="This is App Component"/>
@@ -90,7 +91,7 @@ let TaskStyled = styled.div`
   padding: 10px;
   border: 2px solid #29322f;
   width: 300px;
-  background-image: linear-gradient(60deg, #2d2932, rgba(72, 0, 255, 0.57));
+  background-image: linear-gradient(60deg, rgba(41, 50, 50, 0.9), rgba(0, 255, 255, 0.57));
   border-radius: 10px;
 `
 
