@@ -22,13 +22,15 @@ interface AccordionType {
 }
 
 export let UncontrolledAccordion:React.FC = () => {
+
     let verIdSecond = "2";
     let [collapse, changeCollapse] = useState({
-        [verIdSecond]: {id: 2, title: "Menu teacher", isDone: true
+        [verIdSecond]: {id: 2, title: "List movies", isDone: true, movies: ["We're the Millers", "Free city", "Ready Player One"]
         }
     })
+
     return <div>
         <AccordionTitle id = {verIdSecond} title = {collapse[verIdSecond].title} changeCollapse = {changeCollapse} collapse={collapse}/>
-        <AccordionBody collapse = {collapse} id = {verIdSecond}/>
+        <AccordionBody collapse = {collapse} id = {verIdSecond} movies={collapse[verIdSecond].movies}/>
     </div>
 }

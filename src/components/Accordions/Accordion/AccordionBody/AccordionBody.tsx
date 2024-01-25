@@ -1,9 +1,13 @@
 import React from "react";
 
-export let AccordionBody: React.FC<any> = ({collapse, id}) => {
+
+interface AccordionBodyStyle {
+     id: string
+    collapse: any,
+    movies: string[],
+}
+export let AccordionBody: React.FC<AccordionBodyStyle> = ({collapse, id, movies}) => {
     return (collapse[id].isDone) ? <ul>
-        <li>Mark</li>
-        <li>Viktor</li>
-        <li>Paulo</li>
+        {movies.map((el) => <li>{el}</li>)}
     </ul> : <></>
 }

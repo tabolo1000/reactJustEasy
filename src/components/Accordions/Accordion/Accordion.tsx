@@ -17,11 +17,12 @@ interface AccordionType {
     title: string,
     changeCollapse: Dispatch<SetStateAction<any>>,
     collapse: any,
+    movies: string[],
 }
 
 export let Accordion:FC<AccordionType> = (props) => {
     return <div>
         <AccordionTitle {...props}/>
-        <AccordionBody collapse = {props.collapse} id = {props.id}/>
+        <AccordionBody collapse = {props.collapse} id = {props.id} movies = {props.movies}/>
     </div>
 }

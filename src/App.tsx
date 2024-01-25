@@ -34,7 +34,7 @@ let verIdFirst = "1";
 function App() {
    let [countStar, setCountStar] = useState(0)
     let [collapse, changeCollapse] = useState({
-        [verIdFirst]: {id: 1, title: "Menu students", isDone: true},
+        [verIdFirst]: {id: 1, title: "List Serials", isDone: true, movies: ["Stargate", "Spartacus", "The Punisher"]},
         // [verIdSecond]: {id: 2, title: "Menu teacher", isDone: true},
     })
     let [on, setOn] = useState(false)
@@ -51,7 +51,9 @@ function App() {
                 <OnOff on = {on} setOn = {setOn} />
                 <Rating countStar = {countStar} setCountStar = {setCountStar}/>
                 <Accordion id={verIdFirst} title={collapse[verIdFirst].title} changeCollapse={changeCollapse}
-                           collapse={collapse}/>
+                           collapse={collapse}
+                movies={collapse[verIdFirst].movies}
+                />
                 <UncontrolledRating/>
                 <UncontrolledAccordion />
             </TaskStyled>
