@@ -1,7 +1,7 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react';
-import {Accordion} from "./components/Accordion/Accordion";
+import {Accordion} from "./components/Accordions/Accordion/Accordion";
 import {OnOff} from "./components/OnOff/OnOff";
-import {UncontrolledAccordion} from "./components/Accordion/Uncontrolled/UncontrolledAccordion";
+import {UncontrolledAccordion} from "./components/Accordions/Uncontrolled/UncontrolledAccordion";
 import styled from "styled-components";
 import {UncontrolledRating} from "./components/Rating/UncantrolledRating/UncantrolledRating";
 
@@ -37,6 +37,7 @@ function App() {
         [verIdFirst]: {id: 1, title: "Menu students", isDone: true},
         // [verIdSecond]: {id: 2, title: "Menu teacher", isDone: true},
     })
+    let [on, setOn] = useState(false)
     return (
         <div style={{
             display: "flex",
@@ -47,7 +48,7 @@ function App() {
         }}>
             <TaskStyled >
                 <AppTitle title="This is App Component"/>
-                <OnOff/>
+                <OnOff on = {on} setOn = {setOn} />
                 <Rating countStar = {countStar} setCountStar = {setCountStar}/>
                 <Accordion id={verIdFirst} title={collapse[verIdFirst].title} changeCollapse={changeCollapse}
                            collapse={collapse}/>
@@ -74,7 +75,7 @@ export let Star: FC<any> = ({selected, id, setCountStar}) => {
     let  changeStarHandler = (newCountStar: number) =>{
         setCountStar(newCountStar)
     }
-    return (selected) ? <StarListStyle onClick = {() => {changeStarHandler(id)} } style={{fontWeight: "200"}}>star</StarListStyle> : <StarListStyle onClick = {() => {changeStarHandler(id)}}>star</StarListStyle>
+    return (selected) ? <StarListStyle onClick = {() => {changeStarHandler(id)} } style={{fontWeight: "200"}}>★</StarListStyle> : <StarListStyle onClick = {() => {changeStarHandler(id)}}>☆</StarListStyle>
 }
 
 
@@ -84,6 +85,7 @@ let AppTitle: FC<AppTitleType> = ({title}) => {
 
 
 let TaskStyled = styled.div`
+  color: rgba(255, 255, 255, 0.73);
   display: flex;
   flex-direction: column;
   justify-content: center;

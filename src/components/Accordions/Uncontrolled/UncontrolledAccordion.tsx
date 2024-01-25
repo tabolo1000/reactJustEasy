@@ -1,4 +1,6 @@
 import React, {Dispatch, SetStateAction, useState} from "react";
+import {AccordionTitle} from "../Accordion/AccordionTitle/AccordionTitle";
+import {AccordionBody} from "../Accordion/AccordionBody/AccordionBody";
 
 
 interface AccordingTitleType {
@@ -18,16 +20,7 @@ interface AccordionType {
     changeCollapse: Dispatch<SetStateAction<any>>,
     collapse: any,
 }
-let AccordionTitle:React.FC<AccordionType> = ({ id ,title, changeCollapse, collapse}) => {
-    return <h3 onClick = {() => changeCollapse({...collapse, [id]: {...collapse[id], isDone: !collapse[id].isDone} })}>{title}</h3>
-}
-let AccordionBody:React.FC<any> = ({collapse, id}) => {
-    return (collapse[id].isDone)?<ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-    </ul>: <></>
-}
+
 export let UncontrolledAccordion:React.FC = () => {
     let verIdSecond = "2";
     let [collapse, changeCollapse] = useState({

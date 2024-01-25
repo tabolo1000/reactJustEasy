@@ -15,21 +15,40 @@ const buttonStyle = {
     borderRadius: "10px",
     cursor: "pointer"
 }
-export function OnOff(){
 
-    let [on, setOn] = useState(false)
-    const onButtonExtensionStyle = {...buttonStyle, backgroundColor: (on) ? "green" : ""}
-    const offButtonExtensionStyle = {...buttonStyle, backgroundColor: (!on) ? "red" : ""}
-    const singLightExtensionStyle = {...singLiteStyle, backgroundColor: (on) ? "green" : "red" }
+interface OnOffType {
+    on: boolean,
+    setOn: (on: boolean) => void
+}
+
+export function OnOff({on, setOn}: OnOffType) {
+
+
+    let styleOnOff = {
+         onButtonExtensionStyle: {...buttonStyle, backgroundColor: (on) ? "green" : ""},
+         offButtonExtensionStyle: {...buttonStyle, backgroundColor: (!on) ? "red" : ""},
+         singLightExtensionStyle: {
+            ...singLiteStyle,
+            backgroundColor: (on) ? "green" : "red",
+            borderColor: (on) ? "green" : "red"
+        },
+    }
+
 
     const setOnHandler = (lightGreen: boolean) => {
         setOn(lightGreen)
     }
     return <div>
-        <ul style = {{listStyle: "none", display: "flex", justifyContent: "space-around", width: "150px"}}>
-            <li style = {onButtonExtensionStyle} onClick = {()=>{ setOnHandler(true)} }>ON</li>
-            <li style = {offButtonExtensionStyle} onClick = { () => {setOnHandler(false)}}>OFF</li>
-            <li style = {singLightExtensionStyle}>Light</li>
+        <ul style={{listStyle: "none", display: "flex", justifyContent: "space-around", width: "150px"}}>
+            <li style={{...styleOnOff.onButtonExtensionStyle, borderColor: "green"}} onClick={() => {
+                setOnHandler(true)
+            }}>ON
+            </li>
+            <li style={styleOnOff.offButtonExtensionStyle} onClick={() => {
+                setOnHandler(false)
+            }}>OFF
+            </li>
+            <li style={styleOnOff.singLightExtensionStyle}>Light</li>
         </ul>
     </div>
 }
