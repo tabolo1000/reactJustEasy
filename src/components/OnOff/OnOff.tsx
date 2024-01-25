@@ -25,13 +25,14 @@ export function OnOff({on, setOn}: OnOffType) {
 
 
     let styleOnOff = {
-         onButtonExtensionStyle: {...buttonStyle, backgroundColor: (on) ? "green" : ""},
-         offButtonExtensionStyle: {...buttonStyle, backgroundColor: (!on) ? "red" : ""},
+         onButtonExtensionStyle: {...buttonStyle, backgroundColor: (on) ? "green" : "", borderColor: "green"},
+         offButtonExtensionStyle: {...buttonStyle, backgroundColor: (!on) ? "red" : "",},
          singLightExtensionStyle: {
             ...singLiteStyle,
             backgroundColor: (on) ? "green" : "red",
             borderColor: (on) ? "green" : "red"
         },
+        allListStyle: {listStyle: "none", display: "flex", justifyContent: "space-around", width: "150px"},
     }
 
 
@@ -39,8 +40,8 @@ export function OnOff({on, setOn}: OnOffType) {
         setOn(lightGreen)
     }
     return <div>
-        <ul style={{listStyle: "none", display: "flex", justifyContent: "space-around", width: "150px"}}>
-            <li style={{...styleOnOff.onButtonExtensionStyle, borderColor: "green"}} onClick={() => {
+        <ul style={styleOnOff.allListStyle}>
+            <li style={styleOnOff.onButtonExtensionStyle} onClick={() => {
                 setOnHandler(true)
             }}>ON
             </li>

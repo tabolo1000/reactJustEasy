@@ -28,11 +28,12 @@ interface AppTitleType {
 }
 
 let verIdFirst = "1";
+
 // let verIdSecond = "2";
 
 
 function App() {
-   let [countStar, setCountStar] = useState(0)
+    let [countStar, setCountStar] = useState(0)
     let [collapse, changeCollapse] = useState({
         [verIdFirst]: {id: 1, title: "List Serials", isDone: true, movies: ["Stargate", "Spartacus", "The Punisher"]},
         // [verIdSecond]: {id: 2, title: "Menu teacher", isDone: true},
@@ -46,16 +47,16 @@ function App() {
             height: "100%",
             backgroundColor: "darkolivegreen"
         }}>
-            <TaskStyled >
+            <TaskStyled>
                 <AppTitle title="This is App Component"/>
-                <OnOff on = {on} setOn = {setOn} />
-                <Rating countStar = {countStar} setCountStar = {setCountStar}/>
+                <OnOff on={on} setOn={setOn}/>
+                <Rating countStar={countStar} setCountStar={setCountStar}/>
                 <Accordion id={verIdFirst} title={collapse[verIdFirst].title} changeCollapse={changeCollapse}
                            collapse={collapse}
-                movies={collapse[verIdFirst].movies}
+                           movies={collapse[verIdFirst].movies}
                 />
                 <UncontrolledRating/>
-                <UncontrolledAccordion />
+                <UncontrolledAccordion/>
             </TaskStyled>
         </div>
     );
@@ -66,7 +67,7 @@ export default App;
 let Rating: React.FC<RatingProps> = ({countStar, setCountStar}) => {
 
     let stars = [1, 2, 3, 4, 5].map((el, index) => {
-        return (++index <= countStar) ? <Star id = {index} selected={true} setCountStar = {setCountStar}/> : <Star id = {index} selected={false} setCountStar = {setCountStar}/>
+        return <Star id={index} selected={(index <= countStar)} setCountStar={setCountStar}/>
     })
     return <ul style={RatingULStyle}>
         {stars}
@@ -74,10 +75,14 @@ let Rating: React.FC<RatingProps> = ({countStar, setCountStar}) => {
 }
 
 export let Star: FC<any> = ({selected, id, setCountStar}) => {
-    let  changeStarHandler = (newCountStar: number) =>{
+    let changeStarHandler = (newCountStar: number) => {
         setCountStar(newCountStar)
     }
-    return (selected) ? <StarListStyle onClick = {() => {changeStarHandler(id)} } style={{fontWeight: "200"}}>★</StarListStyle> : <StarListStyle onClick = {() => {changeStarHandler(id)}}>☆</StarListStyle>
+    return <StarListStyle onClick={() => {
+        changeStarHandler(id)
+    }}>
+        {(selected) ? "★" : "☆"}
+    </StarListStyle>
 }
 
 
@@ -100,5 +105,5 @@ let TaskStyled = styled.div`
 `
 
 let StarListStyle = styled.li`
-    cursor: pointer;
+  cursor: pointer;
 `
