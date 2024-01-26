@@ -56,6 +56,8 @@
     "@storybook/react-webpack5": "^7.6.10",
     "@storybook/test": "^7.6.10",
     "eslint-plugin-storybook": "^0.6.15",
+    "info": "^0.0.6-beta.0",
+    "npm": "^10.4.0",
     "prop-types": "^15.8.1",
     "storybook": "^7.6.10",
     "webpack": "^5.89.0"
