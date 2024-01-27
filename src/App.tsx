@@ -4,6 +4,7 @@ import {OnOff} from "./components/OnOff/OnOff";
 import {UncontrolledAccordion} from "./components/Accordions/Uncontrolled/UncontrolledAccordion";
 import styled from "styled-components";
 import {UncontrolledRating} from "./components/Rating/UncantrolledRating/UncantrolledRating";
+import {Rating} from "./components/Rating/Rating";
 
 export const RatingULStyle = {
     listStyleType: "none",
@@ -12,10 +13,7 @@ export const RatingULStyle = {
     width: "150px",
 }
 
-interface RatingProps {
-    countStar: number,
-    setCountStar: Dispatch<SetStateAction<number>>
-}
+
 
 interface StarPropsType {
     selected?: boolean,
@@ -63,16 +61,6 @@ function App() {
 }
 
 export default App;
-
-let Rating: React.FC<RatingProps> = ({countStar, setCountStar}) => {
-
-    let stars = [1, 2, 3, 4, 5].map((el, index) => {
-        return <Star id={index} selected={(index <= countStar)} setCountStar={setCountStar}/>
-    })
-    return <ul style={RatingULStyle}>
-        {stars}
-    </ul>
-}
 
 export let Star: FC<any> = ({selected, id, setCountStar}) => {
     let changeStarHandler = (newCountStar: number) => {
