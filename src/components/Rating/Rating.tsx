@@ -1,5 +1,6 @@
 import React, {Dispatch, SetStateAction} from "react";
-import {RatingULStyle, Star} from "../../App";
+import {RatingULStyle} from "../../App";
+import {Star} from "../Star/Star";
 
 interface RatingProps {
     countStar: number,

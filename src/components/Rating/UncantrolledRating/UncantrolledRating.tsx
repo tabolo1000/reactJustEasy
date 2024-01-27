@@ -1,5 +1,6 @@
-import {RatingULStyle, Star} from "../../../App";
+import {RatingULStyle} from "../../../App";
 import {useState} from "react";
+import {Star} from "../../Star/Star";
 
 export let UncontrolledRating = () => {
     let [countStar, setCountStar] = useState(0)

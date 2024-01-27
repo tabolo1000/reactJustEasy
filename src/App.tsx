@@ -62,17 +62,6 @@ function App() {
 
 export default App;
 
-export let Star: FC<any> = ({selected, id, setCountStar}) => {
-    let changeStarHandler = (newCountStar: number) => {
-        setCountStar(newCountStar)
-    }
-    return <StarListStyle onClick={() => {
-        changeStarHandler(id)
-    }}>
-        {(selected) ? "★" : "☆"}
-    </StarListStyle>
-}
-
 
 let AppTitle: FC<AppTitleType> = ({title}) => {
     return <>{title}</>
@@ -92,6 +81,4 @@ let TaskStyled = styled.div`
   border-radius: 10px;
 `
 
-let StarListStyle = styled.li`
-  cursor: pointer;
-`
+
