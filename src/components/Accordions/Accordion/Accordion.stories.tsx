@@ -14,7 +14,7 @@ export const CollapsedAccordion = () => {
 
 
     let [collapse, changeCollapse] = useState({
-        [verIdFirst]: {id: 1, title: "List Serials", isDone: false, movies: ["Stargate", "Spartacus", "The Punisher"]}
+        [verIdFirst]: { id: 1, title: "List Serials", isDone: false, movies: ["Stargate", "Spartacus", "The Punisher"] }
     })
 
 
